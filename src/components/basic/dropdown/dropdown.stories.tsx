@@ -19,8 +19,12 @@ const Template: ComponentStory<typeof Dropdown> = () => (
     <Dropdown className="inline-flex">
       <DropdownTrigger>Open</DropdownTrigger>
       <DropdownContent className="mt-8">
-        <DropdownItem text="Profile" href="/" as={WrappedLink} />
-        <DropdownItem text="Logout" onClick={() => console.log("Logout")} />
+        <DropdownItem href="/" as={WrappedLink}>
+          Profile
+        </DropdownItem>
+        <DropdownItem onClick={() => console.log("Logout")}>
+          Logout
+        </DropdownItem>
       </DropdownContent>
     </Dropdown>
   </div>

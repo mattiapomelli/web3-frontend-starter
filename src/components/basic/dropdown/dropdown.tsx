@@ -38,13 +38,13 @@ WrappedLink.displayName = "WrappedLink";
 
 interface DropdownItemProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   as?: ElementType;
-  text: string;
   onClick?: () => void;
 }
 
 export const DropdownItem = ({
   as: Tag = "button",
-  text,
+  children,
+  className,
   ...rest
 }: DropdownItemProps) => {
   return (
@@ -61,11 +61,12 @@ export const DropdownItem = ({
               "bg-base-200",
               "hover:bg-base-300",
               { "bg-base-300": active },
+              className,
             ),
           )}
           {...rest}
         >
-          {text}
+          {children}
         </Tag>
       )}
     </Menu.Item>

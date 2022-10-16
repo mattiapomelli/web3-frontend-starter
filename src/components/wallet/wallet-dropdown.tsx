@@ -26,14 +26,13 @@ export const WalletDropdown = ({ address }: WalletDropdownProps) => {
 
   return (
     <Dropdown className="inline-flex">
-      <DropdownTrigger className="flex items-center gap-2">
-        {/* TODO: Add balance */}
+      <DropdownTrigger className="rounded-btn flex items-center gap-2 bg-base-200 py-1.5 px-4 hover:bg-base-300">
         <span>
           {ensName ?? <Address address={address} className="font-medium" />}
         </span>
         <AddressAvatar address={address} />
       </DropdownTrigger>
-      <DropdownContent className="mt-10">
+      <DropdownContent className="right-0 mt-2">
         <DropdownItem
           onClick={() => copyToClipboard(address)}
           as="button"

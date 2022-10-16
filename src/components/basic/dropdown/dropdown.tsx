@@ -92,14 +92,16 @@ export const DropdownContent = ({ children, className }: CommonProps) => {
       leaveTo="opacity-0 translate-y-1"
     >
       <Menu.Items
-        className={cx(
-          "absolute -right-2 z-20 mt-4",
-          "flex flex-col gap-1",
-          "min-w-[220px] p-2",
-          "rounded-btn",
-          "bg-base-200",
-          "shadow-lg drop-shadow-white ring-1 ring-white/10 shadow-white/10 focus:outline-none",
-          className,
+        className={overrideTailwindClasses(
+          cx(
+            "absolute -right-2 z-20 top-full",
+            "flex flex-col gap-1",
+            "min-w-[220px] p-2",
+            "rounded-btn",
+            "bg-base-200",
+            "shadow-lg drop-shadow-white ring-1 ring-white/10 shadow-white/10 focus:outline-none",
+            className,
+          ),
         )}
       >
         {children}

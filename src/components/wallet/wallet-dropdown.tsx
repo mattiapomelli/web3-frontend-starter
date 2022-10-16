@@ -1,4 +1,4 @@
-import { useDisconnect, useEnsName } from "wagmi";
+import { useDisconnect } from "wagmi";
 
 import { getAddressExplorerLink } from "@constants/urls";
 import CopyIcon from "@icons/copy.svg";
@@ -20,16 +20,12 @@ interface WalletDropdownProps {
 }
 
 export const WalletDropdown = ({ address }: WalletDropdownProps) => {
-  const { data: ensName } = useEnsName({ address });
-
   const { disconnect } = useDisconnect();
 
   return (
     <Dropdown className="inline-flex">
       <DropdownTrigger className="rounded-btn flex items-center gap-2 bg-base-200 py-1.5 px-4 hover:bg-base-300">
-        <span className="font-medium">
-          {ensName ?? <Address address={address} />}
-        </span>
+        <Address address={address} />
         <AddressAvatar address={address} />
       </DropdownTrigger>
       <DropdownContent className="right-0 mt-2">

@@ -13,10 +13,10 @@ const variantClassname = {
 };
 
 const sizeClassname = {
-  xs: "input-xs h-7 px-2.5 min-w-[11rem]",
-  sm: "input-sm h-8 px-3 min-w-[12rem]",
+  xs: "input-xs h-8 px-2.5 min-w-[11rem]",
+  sm: "input-sm h-9 px-3 min-w-[12rem]",
   md: "h-10 px-4 min-w-[13rem]",
-  lg: "input-lg h-12 px-5 min-w-[14rem]",
+  lg: "input-lg h-11 px-5 min-w-[14rem]",
 };
 
 const iconClass =

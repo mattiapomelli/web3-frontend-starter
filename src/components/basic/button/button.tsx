@@ -23,10 +23,10 @@ const ringClassname = {
 };
 
 const sizeClassname = {
-  xs: "btn-xs min-w-[4.9875rem] h-7 px-3.5",
-  sm: "btn-sm min-w-[5.7rem] h-8 px-4",
+  xs: "btn-xs min-w-[5.7rem] h-8 px-3.5",
+  sm: "btn-sm min-w-[6.4125rem] h-9 px-4",
   md: "min-w-[7.125rem] h-10 px-5",
-  lg: "btn-lg min-w-[8.55rem] h-12 px-6",
+  lg: "btn-lg min-w-[7.8375rem] h-11 px-6",
 };
 
 const textColorClassname = {

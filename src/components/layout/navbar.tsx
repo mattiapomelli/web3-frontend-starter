@@ -1,19 +1,14 @@
 import { Transition } from "@headlessui/react";
-import Link from "next/link";
 
-import { Avatar } from "@components/basic/avatar";
 import { Button } from "@components/basic/button";
 import { Logo } from "@components/basic/logo";
 import { ThemeToggle } from "@components/basic/theme-toggle";
-import { useUser } from "@contexts/auth-provider";
 import { useTransitionControl } from "@hooks/use-transition-control";
 
 import { Container } from "./container";
 
 export const Navbar = () => {
-  const { user, loading } = useUser();
-
-  const [show] = useTransitionControl(loading);
+  const [show] = useTransitionControl(false);
 
   return (
     <header className="flex h-20 items-center">
@@ -30,15 +25,7 @@ export const Navbar = () => {
         >
           <div className="flex items-center gap-4">
             <ThemeToggle />
-            {user ? (
-              <Avatar user={user} />
-            ) : (
-              <Link href="/signup">
-                <a>
-                  <Button>Get started</Button>
-                </a>
-              </Link>
-            )}
+            <Button>Connect</Button>
           </div>
         </Transition>
       </Container>

@@ -37,9 +37,9 @@ export const WalletDropdown = ({ address }: WalletDropdownProps) => {
         <DropdownItem
           onClick={() => copyToClipboard(address)}
           as="button"
-          className="gap-2"
+          className="gap-2 text-sm"
         >
-          <CopyIcon />
+          <CopyIcon className="text-lg" />
           Copy address
         </DropdownItem>
         <DropdownItem
@@ -47,17 +47,17 @@ export const WalletDropdown = ({ address }: WalletDropdownProps) => {
           target="_blank"
           rel="noopener noreferrer"
           as="a"
-          className="gap-2"
+          className="gap-2 text-sm"
         >
-          <ExternalLinkIcon />
+          <ExternalLinkIcon className="text-lg" />
           See in explorer
         </DropdownItem>
         <DropdownItem
           as="button"
           onClick={() => disconnect()}
-          className="gap-2"
+          className="gap-2 text-sm"
         >
-          <DisconnectIcon />
+          <DisconnectIcon className="text-lg" />
           Disconnect
         </DropdownItem>
       </DropdownContent>

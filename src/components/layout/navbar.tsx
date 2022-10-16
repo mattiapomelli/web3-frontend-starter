@@ -1,21 +1,17 @@
 import { Transition } from "@headlessui/react";
-import { useAccount, useEnsName } from "wagmi";
+import { useAccount } from "wagmi";
 
-import { Button } from "@components/basic/button";
 import { Logo } from "@components/basic/logo";
 import { ThemeToggle } from "@components/basic/theme-toggle";
-import { useConnectModal } from "@hooks/use-connect-modal";
+import { WalletStatus } from "@components/wallet-status";
 import { useTransitionControl } from "@hooks/use-transition-control";
 
 import { Container } from "./container";
 
 export const Navbar = () => {
-  const { address, isConnected, isConnecting, isReconnecting } = useAccount();
-  const { data: ensName } = useEnsName({ address });
+  const { isConnecting, isReconnecting } = useAccount();
 
   const [show] = useTransitionControl(isReconnecting || isConnecting);
-
-  const openConnectModal = useConnectModal();
 
   return (
     <header className="flex h-20 items-center">
@@ -32,11 +28,7 @@ export const Navbar = () => {
         >
           <div className="flex items-center gap-4">
             <ThemeToggle />
-            {isConnected ? (
-              <div>{ensName ?? address}</div>
-            ) : (
-              <Button onClick={openConnectModal}>Connect</Button>
-            )}
+            <WalletStatus />
           </div>
         </Transition>
       </Container>

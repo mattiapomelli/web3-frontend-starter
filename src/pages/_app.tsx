@@ -2,13 +2,15 @@ import "../styles/globals.css";
 import { useAtom } from "jotai";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
-import { configureChains, chain, createClient, WagmiConfig } from "wagmi";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
 import { ConnectModal } from "@components/connect-modal";
+import { CHAIN } from "@constants/chains";
+import { ALCHEMY_RPC_URL } from "@constants/urls";
 import { connectModalAtom } from "@hooks/use-connect-modal";
 import { DefaultLayout } from "@layouts/default-layout";
 import { ExtendedPage } from "@types";
@@ -18,7 +20,7 @@ import SEO from "../../next-seo.config";
 import type { AppProps } from "next/app";
 
 const { chains, provider, webSocketProvider } = configureChains(
-  [chain.mainnet],
+  [CHAIN],
   [
     alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY }),
     publicProvider(),
@@ -32,10 +34,7 @@ const connectors = [
   new WalletConnectConnector({
     chains,
     options: {
-      rpc: {
-        [chain.mainnet
-          .id]: `https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`,
-      },
+      rpc: { [CHAIN.id]: ALCHEMY_RPC_URL[CHAIN.id] },
     },
   }),
 ];

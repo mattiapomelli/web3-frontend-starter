@@ -1,24 +1,22 @@
 import { Transition } from "@headlessui/react";
-import { useAccount, useConnect, useEnsName } from "wagmi";
-import { InjectedConnector } from "wagmi/connectors/injected";
+import { useState } from "react";
+import { useAccount, useEnsName } from "wagmi";
 
 import { Button } from "@components/basic/button";
 import { Logo } from "@components/basic/logo";
 import { ThemeToggle } from "@components/basic/theme-toggle";
+import { ConnectModal } from "@components/connect-modal";
 import { useTransitionControl } from "@hooks/use-transition-control";
 
 import { Container } from "./container";
 
 export const Navbar = () => {
   const { address, isConnected, isConnecting, isReconnecting } = useAccount();
-
   const { data: ensName } = useEnsName({ address });
 
-  const { connect } = useConnect({
-    connector: new InjectedConnector(),
-  });
-
   const [show] = useTransitionControl(isReconnecting || isConnecting);
+
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <header className="flex h-20 items-center">
@@ -38,7 +36,13 @@ export const Navbar = () => {
             {isConnected ? (
               <div>{ensName ?? address}</div>
             ) : (
-              <Button onClick={() => connect()}>Connect</Button>
+              <>
+                <Button onClick={() => setShowModal(true)}>Connect</Button>
+                <ConnectModal
+                  open={showModal}
+                  onClose={() => setShowModal(false)}
+                />
+              </>
             )}
           </div>
         </Transition>

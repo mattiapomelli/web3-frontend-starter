@@ -3,7 +3,7 @@ import { useAccount } from "wagmi";
 
 import { Logo } from "@components/basic/logo";
 import { ThemeToggle } from "@components/basic/theme-toggle";
-import { WalletStatus } from "@components/wallet-status";
+import { WalletStatus } from "@components/wallet/wallet-status";
 import { useTransitionControl } from "@hooks/use-transition-control";
 
 import { Container } from "./container";

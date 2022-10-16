@@ -1,11 +1,12 @@
-import { useAccount, useEnsName, useNetwork, useSwitchNetwork } from "wagmi";
+import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
 
 import { Button } from "@components/basic/button";
 import { useConnectModal } from "@hooks/use-connect-modal";
 
+import { WalletDropdown } from "./wallet-dropdown";
+
 export const WalletStatus = () => {
   const { address, isConnected } = useAccount();
-  const { data: ensName } = useEnsName({ address });
 
   const { chain, chains } = useNetwork();
   const { switchNetwork } = useSwitchNetwork();
@@ -26,8 +27,8 @@ export const WalletStatus = () => {
   }
 
   // Connected (Needs verification or Logged in)
-  if (isConnected) {
-    return <div>{ensName ?? address}</div>;
+  if (isConnected && address) {
+    return <WalletDropdown address={address} />;
   }
 
   // Disconnected

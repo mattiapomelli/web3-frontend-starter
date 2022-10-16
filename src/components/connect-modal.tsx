@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import cx from "classnames";
 import { Connector, useConnect } from "wagmi";
 
 import { Modal, BaseModalProps } from "@components/basic/modal";
@@ -44,7 +44,7 @@ export const ConnectModal = ({ open, onClose }: BaseModalProps) => {
           <button
             key={connector.id}
             onClick={() => onConnect(connector)}
-            className={classNames(
+            className={cx(
               "bg-base-200 flex items-center px-4 py-3 rounded-btn gap-4 ",
               connector.ready
                 ? "hover:bg-base-300"

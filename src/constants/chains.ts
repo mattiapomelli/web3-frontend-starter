@@ -9,7 +9,7 @@ const getChain = () => {
 
   switch (process.env.NEXT_PUBLIC_CHAIN) {
     case "localhost":
-      return chain.hardhat;
+      return chain.localhost;
     case "testnet":
       return chain.goerli;
     case "mainnet":

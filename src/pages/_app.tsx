@@ -19,7 +19,7 @@ import SEO from "../../next-seo.config";
 
 import type { AppProps } from "next/app";
 
-const { chains, provider, webSocketProvider } = configureChains(
+const { chains, provider } = configureChains(
   [CHAIN],
   [
     alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY }),
@@ -43,7 +43,6 @@ const client = createClient({
   autoConnect: true,
   connectors,
   provider,
-  webSocketProvider,
 });
 
 function MyApp({ Component, pageProps }: AppProps) {

@@ -23,6 +23,7 @@
       "@utils/*": ["utils/*"],
       "@icons/*": ["icons/*"],
       "@constants/*": ["constants/*"],
+      "@abis/*": ["abis/*"],
       "@types": ["types"],
     }
   },

@@ -21,7 +21,10 @@ type Config<TAbi extends Abi, TFunctionName extends string> = Omit<
   UsePrepareContractWriteConfig<TAbi, TFunctionName>,
   WriteArgs
 > &
-  Omit<UseContractWriteConfig<TAbi, TFunctionName>, PrepareArgs | "mode">;
+  Omit<
+    UseContractWriteConfig<TAbi, TFunctionName>,
+    PrepareArgs | "mode" | "request"
+  >;
 
 export const useContractWrite = <
   TAbi extends Abi,
@@ -29,26 +32,44 @@ export const useContractWrite = <
 >(
   config: Config<TAbi, TFunctionName>,
 ) => {
-  const { onSuccess, onError, onSettled, onMutate, request, ...restConfig } =
-    config;
+  const { onSuccess, onError, onSettled, onMutate, ...restConfig } = config;
 
   const { config: writeConfig } = usePrepareContractWrite(restConfig);
 
-  const { data: contractWriteData, ...rest } = useContractWriteBase({
+  const {
+    data: contractWriteData,
+    isLoading: isLoadingWrite,
+    isError: isErrorWrite,
+    isSuccess: isSuccessWrite,
+    isIdle: isIdleWrite,
+    error: errorWrite,
+    ...rest
+  } = useContractWriteBase({
     ...writeConfig,
-    request,
     onSuccess,
     onError,
     onSettled,
     onMutate,
   } as UseContractWriteConfig<TAbi, TFunctionName>);
 
-  const { data } = useWaitForTransaction({
+  const {
+    data,
+    isLoading: isLoadingWait,
+    isError: isErrorWait,
+    isSuccess: isSuccessWait,
+    isIdle: isIdleWait,
+    error: errorWait,
+  } = useWaitForTransaction({
     hash: contractWriteData?.hash,
   });
 
   return {
     data,
+    isLoading: isLoadingWrite || isLoadingWait,
+    isError: isErrorWrite || isErrorWait,
+    isSuccess: isSuccessWrite && isSuccessWait,
+    isIdle: isIdleWrite && isIdleWait,
+    error: errorWrite || errorWait,
     ...rest,
   };
 };

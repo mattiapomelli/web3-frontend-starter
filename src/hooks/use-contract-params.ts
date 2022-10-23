@@ -1,6 +1,6 @@
 import { useNetwork } from "wagmi";
 
-import { StorageAbi } from "@abis/Storage";
+import { StorageAbi } from "@abis/storage";
 import { STORAGE_ADDRESS } from "@constants/addresses";
 import { CHAIN } from "@constants/chains";
 

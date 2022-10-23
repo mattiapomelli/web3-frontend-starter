@@ -7,9 +7,9 @@ const iconClass =
   "absolute top-1/2 transform -translate-y-1/2 [&>svg]:max-w-min";
 
 const variantClassname = {
-  solid: "bg-base-300 border-base-300",
-  bordered: "bg-transparent border-base-300",
-  ghost: "border-transparent disabled:bg-transparent",
+  solid: "bg-base-300 border-base-300 focus:border-base-300",
+  bordered: "bg-transparent border-base-300 focus:border-base-300",
+  ghost: "border-transparent disabled:bg-transparent focus:border-transparent",
 };
 
 const sizeClassname = {

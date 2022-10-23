@@ -7,6 +7,22 @@ import {
 import { UseContractWriteConfig } from "wagmi/dist/declarations/src/hooks/contracts/useContractWrite";
 import { UsePrepareContractWriteConfig } from "wagmi/dist/declarations/src/hooks/contracts/usePrepareContractWrite";
 
+type Status = "error" | "success" | "idle" | "loading";
+
+const getStatus = (writeStatus: Status, confirmationStatus: Status): Status => {
+  if (writeStatus === "idle") return "idle";
+
+  if (writeStatus === "loading" || confirmationStatus === "loading")
+    return "loading";
+
+  if (writeStatus === "error" || confirmationStatus === "error") return "error";
+
+  if (writeStatus === "success" && confirmationStatus === "success")
+    return "success";
+
+  return "idle";
+};
+
 type PrepareArgs =
   | "args"
   | "address"
@@ -43,6 +59,7 @@ export const useContractWrite = <
     isSuccess: isSuccessWrite,
     isIdle: isIdleWrite,
     error: errorWrite,
+    status: statusWrite,
     ...rest
   } = useContractWriteBase({
     ...writeConfig,
@@ -59,6 +76,7 @@ export const useContractWrite = <
     isSuccess: isSuccessWait,
     isIdle: isIdleWait,
     error: errorWait,
+    status: statusWait,
   } = useWaitForTransaction({
     hash: contractWriteData?.hash,
   });
@@ -70,6 +88,7 @@ export const useContractWrite = <
     isSuccess: isSuccessWrite && isSuccessWait,
     isIdle: isIdleWrite && isIdleWait,
     error: errorWrite || errorWait,
+    status: getStatus(statusWrite, statusWait),
     ...rest,
   };
 };

@@ -43,6 +43,7 @@ const client = createClient({
   autoConnect: true,
   connectors,
   provider,
+  persister: null,
 });
 
 function MyApp({ Component, pageProps }: AppProps) {

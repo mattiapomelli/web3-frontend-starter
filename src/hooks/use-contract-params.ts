@@ -9,7 +9,7 @@ export const useStorageContractParams = () => {
   const currentChain = chain ?? CHAIN;
 
   return {
-    abi: StorageAbi,
     address: STORAGE_ADDRESS[currentChain.id],
+    abi: StorageAbi,
   };
 };

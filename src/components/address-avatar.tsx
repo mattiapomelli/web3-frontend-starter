@@ -2,7 +2,7 @@ import jazzicon from "@metamask/jazzicon";
 import { useLayoutEffect, useMemo, useRef } from "react";
 
 interface AddressAvatarProps {
-  address: string;
+  address: `0x${string}`;
   size?: number;
 }
 

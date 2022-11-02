@@ -6,6 +6,7 @@ import {
 } from "wagmi";
 import { UseContractWriteConfig } from "wagmi/dist/declarations/src/hooks/contracts/useContractWrite";
 import { UsePrepareContractWriteConfig } from "wagmi/dist/declarations/src/hooks/contracts/usePrepareContractWrite";
+import { UseWaitForTransactionConfig } from "wagmi/dist/declarations/src/hooks/transactions/useWaitForTransaction";
 
 type Status = "error" | "success" | "idle" | "loading";
 
@@ -23,7 +24,7 @@ const getStatus = (writeStatus: Status, confirmationStatus: Status): Status => {
   return "idle";
 };
 
-type PrepareArgs =
+type PrepareFields =
   | "args"
   | "address"
   | "abi"
@@ -31,16 +32,28 @@ type PrepareArgs =
   | "chainId"
   | "overrides";
 
-type WriteArgs = "onSuccess" | "onError" | "onSettled";
+type WriteFields = "onError" | "onSettled";
 
-type Config<TAbi extends Abi, TFunctionName extends string> = Omit<
+type WaitFields = "onSuccess";
+
+type PrepareArgs<TAbi extends Abi, TFunctionName extends string> = Omit<
   UsePrepareContractWriteConfig<TAbi, TFunctionName>,
-  WriteArgs
+  WriteFields | WaitFields
+>;
+
+type WriteArgs<TAbi extends Abi, TFunctionName extends string> = Omit<
+  UseContractWriteConfig<TAbi, TFunctionName>,
+  PrepareFields | WaitFields | "mode" | "request"
+>;
+
+type WaitArgs = Pick<UseWaitForTransactionConfig, WaitFields>;
+
+type Config<TAbi extends Abi, TFunctionName extends string> = PrepareArgs<
+  TAbi,
+  TFunctionName
 > &
-  Omit<
-    UseContractWriteConfig<TAbi, TFunctionName>,
-    PrepareArgs | "mode" | "request"
-  >;
+  WriteArgs<TAbi, TFunctionName> &
+  WaitArgs;
 
 export const useContractWrite = <
   TAbi extends Abi,
@@ -63,7 +76,6 @@ export const useContractWrite = <
     ...rest
   } = useContractWriteBase({
     ...writeConfig,
-    onSuccess,
     onError,
     onSettled,
     onMutate,
@@ -79,6 +91,7 @@ export const useContractWrite = <
     status: statusWait,
   } = useWaitForTransaction({
     hash: contractWriteData?.hash,
+    onSuccess,
   });
 
   return {

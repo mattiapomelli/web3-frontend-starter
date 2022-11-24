@@ -10,6 +10,7 @@ const colorClassname = {
   success: "btn-success",
   warning: "btn-warning",
   error: "btn-error",
+  neutral: "btn-neutral",
 };
 
 const ringClassname = {
@@ -20,6 +21,7 @@ const ringClassname = {
   success: "focus:ring-success",
   warning: "focus:ring-warning",
   error: "focus:ring-error",
+  neutral: "focus:ring-neutral",
 };
 
 const sizeClassname = {
@@ -37,6 +39,7 @@ const textColorClassname = {
   success: "text-success",
   warning: "text-warning",
   error: "text-error",
+  neutral: "text-neutral",
 };
 
 const variantClassname = {

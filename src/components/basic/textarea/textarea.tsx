@@ -1,5 +1,5 @@
 import cx from "classnames";
-import React, { TextareaHTMLAttributes, useRef } from "react";
+import React, { forwardRef, Ref, TextareaHTMLAttributes } from "react";
 
 import { Label } from "@components/basic/label";
 
@@ -9,7 +9,7 @@ const variantClassname = {
   ghost: "border-transparent disabled:bg-transparent focus:border-transparent",
 };
 
-export interface TextAreaProps
+export interface BaseTextAreaProps
   extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   variant?: keyof typeof variantClassname;
   label?: string;
@@ -19,59 +19,68 @@ export interface TextAreaProps
   onValueChange?: (value: string) => void;
 }
 
-export const TextArea = ({
-  className,
-  label,
-  error,
-  variant = "solid",
-  block = false,
-  controlId,
-  onValueChange,
-  onChange: baseOnChange,
-  maxLength,
-  ...props
-}: TextAreaProps) => {
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  const handleChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>,
-  ): void => {
-    const { value } = event.currentTarget;
-    onValueChange?.(value);
-    baseOnChange?.(event);
-  };
-
-  return (
-    <div className={cx({ "inline-block": !block, className })}>
-      {label && <Label htmlFor={controlId}>{label}</Label>}
-      <div className="relative">
-        <textarea
-          id={controlId}
-          ref={textareaRef}
-          onChange={handleChange}
-          maxLength={maxLength}
-          {...props}
-          className={cx(
-            "border-2",
-            "text-base-content",
-            "placeholder:text-base-content-neutral",
-            "focus:outline-none focus:ring-4",
-            "w-full",
-            "px-4",
-            "rounded-btn",
-            variantClassname[variant],
-            error
-              ? "!border-error focus:!border-error focus:ring-error/30"
-              : "focus:ring-primary/30",
-          )}
-        />
-      </div>
-      {/* Error Message */}
-      {error && (
-        <label className="label mt-1 py-0">
-          <span className="label-text text-error">{error}</span>
-        </label>
-      )}
-    </div>
-  );
+export type TextAreaProps = BaseTextAreaProps & {
+  ref?: Ref<HTMLTextAreaElement>;
 };
+
+export const TextArea = forwardRef(
+  (
+    {
+      className,
+      label,
+      error,
+      variant = "solid",
+      block = false,
+      controlId,
+      onValueChange,
+      onChange: baseOnChange,
+      maxLength,
+      ...props
+    }: TextAreaProps,
+    ref?: Ref<HTMLTextAreaElement>,
+  ) => {
+    const handleChange = (
+      event: React.ChangeEvent<HTMLTextAreaElement>,
+    ): void => {
+      const { value } = event.currentTarget;
+      onValueChange?.(value);
+      baseOnChange?.(event);
+    };
+
+    return (
+      <div className={cx({ "inline-block": !block, className })}>
+        {label && <Label htmlFor={controlId}>{label}</Label>}
+        <div className="relative">
+          <textarea
+            id={controlId}
+            ref={ref}
+            onChange={handleChange}
+            maxLength={maxLength}
+            {...props}
+            className={cx(
+              "border-2",
+              "text-base-content",
+              "placeholder:text-base-content-neutral",
+              "focus:outline-none focus:ring-4",
+              "w-full",
+              "px-4",
+              "rounded-btn",
+              variantClassname[variant],
+              error
+                ? "!border-error focus:!border-error focus:ring-error/30"
+                : "focus:ring-primary/30",
+            )}
+          />
+        </div>
+        {/* Error Message */}
+        {error && (
+          <label className="label mt-1 py-0">
+            <span className="label-text text-error">{error}</span>
+          </label>
+        )}
+      </div>
+    );
+  },
+);
+
+TextArea.displayName = "TextArea";

@@ -1,6 +1,6 @@
 import cx from "classnames";
 import { ElementType, LabelHTMLAttributes } from "react";
-import { overrideTailwindClasses } from "tailwind-override";
+import { twMerge } from "tailwind-merge";
 
 export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   className?: string;
@@ -15,7 +15,7 @@ export const Label = ({
 }: LabelProps) => {
   return (
     <Tag
-      className={overrideTailwindClasses(
+      className={twMerge(
         cx(
           "mb-1 flex items-center gap-2 text-sm font-semibold",
           { "cursor-pointer": htmlFor },

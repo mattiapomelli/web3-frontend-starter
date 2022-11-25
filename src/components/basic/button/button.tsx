@@ -1,6 +1,6 @@
 import cx from "classnames";
 import { ButtonHTMLAttributes, forwardRef, ReactNode, Ref } from "react";
-import { overrideTailwindClasses } from "tailwind-override";
+import { twMerge } from "tailwind-merge";
 
 const colorClassname = {
   primary: "btn-primary",
@@ -89,7 +89,7 @@ export const Button = forwardRef(
         {...props}
         ref={ref}
         disabled={disabled}
-        className={overrideTailwindClasses(
+        className={twMerge(
           cx(
             "btn min-h-0 animate-none",
             // Solid and outline variants can affect background, text and border color

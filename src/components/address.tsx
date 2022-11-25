@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { overrideTailwindClasses } from "tailwind-override";
+import { twMerge } from "tailwind-merge";
 import { useEnsName } from "wagmi";
 
 interface AddressProps {
@@ -15,7 +15,7 @@ export const Address = ({ address, className }: AddressProps) => {
   const { data: ensName } = useEnsName({ address });
 
   return (
-    <span className={overrideTailwindClasses(cx("font-medium", className))}>
+    <span className={twMerge(cx("font-medium", className))}>
       {ensName ?? formatAddress(address)}
     </span>
   );

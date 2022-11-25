@@ -9,7 +9,7 @@ import {
   Fragment,
   ReactNode,
 } from "react";
-import { overrideTailwindClasses } from "tailwind-override";
+import { twMerge } from "tailwind-merge";
 
 interface CommonProps {
   children: ReactNode;
@@ -51,7 +51,7 @@ export const DropdownItem = ({
     <Menu.Item>
       {({ active }) => (
         <Tag
-          className={overrideTailwindClasses(
+          className={twMerge(
             cx(
               "flex items-center",
               "py-2 px-4",
@@ -92,7 +92,7 @@ export const DropdownContent = ({ children, className }: CommonProps) => {
       leaveTo="opacity-0 translate-y-1"
     >
       <Menu.Items
-        className={overrideTailwindClasses(
+        className={twMerge(
           cx(
             "absolute -right-2 z-20 top-full",
             "flex flex-col gap-1",

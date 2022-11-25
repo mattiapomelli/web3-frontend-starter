@@ -1,7 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import cx from "classnames";
 import { ReactNode } from "react";
-import { overrideTailwindClasses } from "tailwind-override";
+import { twMerge } from "tailwind-merge";
 
 import CrossIcon from "@icons/cross.svg";
 
@@ -32,7 +32,7 @@ export const Modal = ({
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-20 flex items-center justify-center bg-black/50">
           <Dialog.Content
-            className={overrideTailwindClasses(
+            className={twMerge(
               cx(
                 "w-[94%] max-w-md",
                 "bg-base-100",

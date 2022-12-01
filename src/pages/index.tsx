@@ -1,7 +1,7 @@
 import React from "react";
 import { useContractRead } from "wagmi";
 
-import { useStorageContractParams } from "@hooks/use-storage-contract-params";
+import { useStorageContractParams } from "@hooks/use-contract-params";
 
 import type { NextPage } from "next";
 

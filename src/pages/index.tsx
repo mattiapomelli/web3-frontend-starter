@@ -1,22 +1,9 @@
 import React from "react";
-import { useContractRead } from "wagmi";
-
-import { useStorageContractParams } from "@hooks/use-contract-params";
 
 import type { NextPage } from "next";
 
 const Home: NextPage = () => {
-  const params = useStorageContractParams();
-  const { data } = useContractRead({
-    ...params,
-    functionName: "getData",
-  });
-
-  return (
-    <div>
-      <div>{data}</div>
-    </div>
-  );
+  return <div>Home</div>;
 };
 
 export default Home;

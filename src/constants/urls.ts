@@ -3,7 +3,7 @@ import { hardhat, polygonMumbai } from "wagmi/chains";
 import { env } from "env.mjs";
 
 export const EXPLORER_URL: Record<number, string> = {
-  [polygonMumbai.id]: "https://polygonscan.com",
+  [polygonMumbai.id]: "https://mumbai.polygonscan.com",
   [hardhat.id]: "",
 };
 

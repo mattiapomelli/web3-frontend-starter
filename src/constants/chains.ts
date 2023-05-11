@@ -1,19 +1,15 @@
-import { chain } from "wagmi";
+import { hardhat, polygonMumbai } from "wagmi/chains";
+
+import { env } from "env.mjs";
 
 export type ChainMap = { [chainId: number]: string };
 
 const getChain = () => {
-  if (!process.env.NEXT_PUBLIC_CHAIN) {
-    throw new Error("NEXT_PUBLIC_CHAIN envinronment variable must be defined");
-  }
-
-  switch (process.env.NEXT_PUBLIC_CHAIN) {
+  switch (env.NEXT_PUBLIC_CHAIN) {
     case "localhost":
-      return chain.hardhat;
+      return hardhat;
     case "testnet":
-      return chain.goerli;
-    case "mainnet":
-      return chain.mainnet;
+      return polygonMumbai;
     default:
       throw new Error("Invalid NEXT_PUBLIC_CHAIN value");
   }

@@ -1,5 +1,6 @@
 import { useDisconnect } from "wagmi";
 
+import { CHAIN } from "@constants/chains";
 import { getAddressExplorerLink } from "@constants/urls";
 import CopyIcon from "@icons/copy.svg";
 import DisconnectIcon from "@icons/disconnect.svg";
@@ -24,7 +25,7 @@ export const WalletDropdown = ({ address }: WalletDropdownProps) => {
 
   return (
     <Dropdown className="inline-flex">
-      <DropdownTrigger className="rounded-btn flex items-center gap-2 bg-base-200 py-1.5 px-4 hover:bg-base-300">
+      <DropdownTrigger className="rounded-btn flex items-center gap-2 bg-base-200 px-4 py-1.5 hover:bg-base-300">
         <Address address={address} />
         <AddressAvatar address={address} />
       </DropdownTrigger>
@@ -38,7 +39,7 @@ export const WalletDropdown = ({ address }: WalletDropdownProps) => {
           Copy address
         </DropdownItem>
         <DropdownItem
-          href={getAddressExplorerLink(address)}
+          href={getAddressExplorerLink(CHAIN.id, address)}
           target="_blank"
           rel="noopener noreferrer"
           as="a"

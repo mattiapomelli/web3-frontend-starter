@@ -3,7 +3,11 @@ import { z } from "zod";
 
 export const env = createEnv({
   client: {
-    NEXT_PUBLIC_CHAIN: z.union([z.literal("localhost"), z.literal("testnet")]),
+    NEXT_PUBLIC_CHAIN: z.union([
+      z.literal("localhost"),
+      z.literal("testnet"),
+      z.literal("mainnet"),
+    ]),
     NEXT_PUBLIC_ALCHEMY_API_KEY: z.string().min(1),
   },
   runtimeEnv: {

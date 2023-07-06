@@ -17,7 +17,7 @@ export const Navbar = () => {
   return (
     <header className="flex h-20 items-center">
       <Container className="flex w-full items-center justify-between">
-        <Logo />
+        <Logo className="hidden sm:block" />
         <Transition
           show={show}
           enter="transition-opacity duration-250"

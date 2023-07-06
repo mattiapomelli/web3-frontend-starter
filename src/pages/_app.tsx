@@ -8,7 +8,7 @@ import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
-import { CHAIN } from "@constants/chains";
+import { CHAINS } from "@constants/chains";
 import { DefaultLayout } from "@layouts/default-layout";
 import { env } from "env.mjs";
 
@@ -17,13 +17,10 @@ import SEO from "../../next-seo.config";
 import type { ExtendedPage } from "@types";
 import type { AppProps } from "next/app";
 
-const { chains, provider } = configureChains(
-  [CHAIN],
-  [
-    alchemyProvider({ apiKey: env.NEXT_PUBLIC_ALCHEMY_API_KEY }),
-    publicProvider(),
-  ],
-);
+const { chains, provider } = configureChains(CHAINS, [
+  alchemyProvider({ apiKey: env.NEXT_PUBLIC_ALCHEMY_API_KEY }),
+  publicProvider(),
+]);
 
 const { connectors } = getDefaultWallets({
   appName: "Web3 Boilerplate",

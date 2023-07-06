@@ -1,9 +1,9 @@
-import { chain } from "wagmi";
+import { hardhat, polygon, polygonMumbai } from "wagmi/dist/chains";
 
 import { ChainMap } from "./chains";
 
 export const STORAGE_ADDRESS: ChainMap = {
-  [chain.hardhat.id]: "0x5fbdb2315678afecb367f032d93f642f64180aa3",
-  [chain.mainnet.id]: "",
-  [chain.goerli.id]: "'",
+  [hardhat.id]: "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+  [polygonMumbai.id]: "",
+  [polygon.id]: "'",
 };

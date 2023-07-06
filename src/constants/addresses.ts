@@ -1,4 +1,4 @@
-import { hardhat, polygon, polygonMumbai } from "wagmi/dist/chains";
+import { hardhat, polygon, polygonMumbai } from "wagmi/chains";
 
 import { ChainMap } from "./chains";
 

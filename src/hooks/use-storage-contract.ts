@@ -4,7 +4,7 @@ import { StorageAbi } from "@abis/storage";
 import { STORAGE_ADDRESS } from "@constants/addresses";
 import { CHAIN } from "@constants/chains";
 
-export const useKnowledgeLayerCourse = (withSigner = false) => {
+export const useStorage = (withSigner = false) => {
   const provider = useProvider();
   const { data: signer } = useSigner();
 
